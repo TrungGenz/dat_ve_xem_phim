@@ -28,3 +28,26 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php endif; ?>
     </div>
 </nav>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QNU Cinema - Hệ thống đặt vé</title>
+    <link rel="stylesheet" href="../tai_nguyen/css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">7AE<span>SIUNHAN</span></div>
+            <ul class="nav-links">
+                <li><a href="index.php">Trang Chủ</a></li>
+                <li><a href="dat_ve.php">Lịch Chiếu</a></li>
+                <li><a href="#">Phim Hot</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="dang_nhap.php"><button class="btn-login">Đăng Nhập</button></a>
+                <a href="dang_ky.php"><button class="btn-signup">Đăng Ký</button></a>
+            </div>
+        </nav>
+    </header>

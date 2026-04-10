@@ -29,3 +29,32 @@
     <?php endforeach; ?>
 </div>
 <?php include 'thanh_phan/footer.php'; ?>
+<?php include '../thanh_phan/header.php'; ?>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Trải nghiệm điện ảnh đỉnh cao</h1>
+        <p>Đặt vé ngay hôm nay để nhận ưu đãi hấp dẫn!</p>
+        <a href="#movies" class="btn-primary">Xem Phim Ngay</a>
+    </div>
+</section>
+
+<section id="movies" class="movie-section">
+    <h2>Phim Đang Chiếu</h2>
+    <div class="movie-grid">
+        <div class="movie-card">
+            <img src="https://via.placeholder.com/200x300" alt="Phim 1">
+            <h3>Duy sóc lọ</h3>
+            <p>Hành Động | 120 phút</p>
+            <a href="ghe.php" class="btn-ticket">Đặt Vé</a>
+        </div>
+        <div class="movie-card">
+            <img src="https://via.placeholder.com/200x300" alt="Phim 2">
+            <h3>Chuyện Anh Lập</h3>
+            <p>Lãng Mạn | 105 phút</p>
+            <a href="ghe.php" class="btn-ticket">Đặt Vé</a>
+        </div>
+    </div>
+</section>
+
+<?php include '../thanh_phan/footer.php'; ?>
