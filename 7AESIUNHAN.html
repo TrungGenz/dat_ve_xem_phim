@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema Star - Đặt Vé Xem Phim</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">7AE<span>SIUNHAN</span></div>
+            <ul class="nav-links">
+                <li><a href="#">Trang Chủ</a></li>
+                <li><a href="#">Lịch Chiếu</a></li>
+                <li><a href="#">Phim Hot</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn-login" onclick="openModal('loginModal')">Đăng Nhập</button>
+                <button class="btn-signup" onclick="openModal('signupModal')">Đăng Ký</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Trải nghiệm điện ảnh đỉnh cao</h1>
+            <p>Đặt vé ngay hôm nay để nhận ưu đãi hấp dẫn!</p>
+            <a href="#movies" class="btn-primary">Xem Phim Ngay</a>
+        </div>
+    </section>
+
+    <section id="movies" class="movie-section">
+        <h2>Phim Đang Chiếu</h2>
+        <div class="movie-grid">
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/200x300" alt="Phim 1">
+                <h3>Duy sóc lọ</h3>
+                <p>Hành Động | 120 phút</p>
+                <button class="btn-ticket">Đặt Vé</button>
+            </div>
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/200x300" alt="Phim 2">
+                <h3>Chuyện Anh Lập</h3>
+                <p>Lãng Mạn | 105 phút</p>
+                <button class="btn-ticket">Đặt Vé</button>
+            </div>
+            </div>
+    </section>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Đăng Nhập</h2>
+            <form>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Mật khẩu" required>
+                <button type="submit" class="btn-submit">Vào xem ngay</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Đăng Ký Tài Khoản</h2>
+            <form>
+                <input type="text" placeholder="Họ và tên" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Mật khẩu" required>
+                <button type="submit" class="btn-submit">Tạo tài khoản</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = "block";
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
