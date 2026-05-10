@@ -1,44 +1,3 @@
-:root {
-  --main-red: #e50914; /* Màu nhấn chính (giống Netflix) */
-  --bg-black: #111; /* Màu nền chính */
-  --card-bg: #222; /* Màu nền thẻ phim */
-  --text-white: #ffffff;
-}
-
-body {
-  background-color: var(--bg-black);
-  color: var(--text-white);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-}
-/*index*/
-.movie-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(200px, 1fr)
-  ); /* Tự động xuống dòng khi màn hình nhỏ */
-  gap: 20px;
-  padding: 20px;
-}
-
-.movie-card {
-  background: #222;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.3s;
-}
-
-.movie-card:hover {
-  transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi di chuột vào */
-  cursor: pointer;
-}
-
-.movie-card img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover; /* Giúp ảnh không bị méo */
-}
 /* Reset CSS */
 * {
   margin: 0;
@@ -50,16 +9,15 @@ body {
 body {
   background-color: #141414;
   color: white;
-  padding-top: 80px; /* Tránh bị che mất nội dung do Header fixed */
 }
 
-/* Header */
+/* Header & Navigation */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 10%;
-  background: rgba(0, 0, 0, 0.95);
+  padding: 20px 10%;
+  background: rgba(0, 0, 0, 0.9); /* Làm tối hơn để nổi bật chữ */
   position: fixed;
   width: 100%;
   top: 0;
@@ -71,7 +29,6 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: #e50914;
-  text-decoration: none;
 }
 
 .logo span {
@@ -90,7 +47,6 @@ body {
 .nav-links a {
   text-decoration: none;
   color: white;
-  font-weight: 500;
   transition: 0.3s;
 }
 
@@ -98,14 +54,21 @@ body {
   color: #e50914;
 }
 
-.auth-buttons button {
-  padding: 8px 18px;
+/* Auth Buttons & User Info */
+.auth-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.auth-buttons button,
+.auth-buttons a {
+  padding: 8px 20px;
   margin-left: 10px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 5px;
   border: none;
   font-weight: bold;
-  transition: 0.2s;
+  text-decoration: none;
 }
 
 .btn-login {
@@ -114,60 +77,61 @@ body {
   border: 1px solid white !important;
 }
 
-.btn-login:hover {
-  background: white;
-  color: black;
-}
-
 .btn-signup {
   background: #e50914;
   color: white;
 }
 
-.btn-signup:hover {
-  background: #b20710;
-}
-
 /* Hero Section */
 .hero {
-  height: 50vh;
+  height: 60vh;
   background:
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1350&q=80");
+    url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba");
   background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding-top: 80px;
 }
 
-.hero-content h1 {
+.hero h1 {
   font-size: 3rem;
   margin-bottom: 10px;
+}
+.hero p {
+  font-size: 1.2rem;
+  color: #ccc;
 }
 
 .btn-primary {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 25px;
   padding: 12px 35px;
   background: #e50914;
   color: white;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 5px;
   font-weight: bold;
-  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #b20710;
 }
 
 /* Movie Grid */
 .movie-section {
-  padding: 50px 10%;
+  padding: 60px 10%;
 }
 
 .movie-section h2 {
-  border-left: 4px solid #e50914;
-  padding-left: 15px;
+  font-size: 2rem;
   margin-bottom: 30px;
+  border-left: 5px solid #e50914;
+  padding-left: 15px;
 }
 
 .movie-grid {
@@ -179,7 +143,7 @@ body {
 .movie-card {
   background: #1f1f1f;
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 12px;
   text-align: center;
   transition: 0.3s;
   border: 1px solid #333;
@@ -194,32 +158,34 @@ body {
   width: 100%;
   height: 300px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 8px;
   margin-bottom: 15px;
 }
 
 .movie-card h3 {
   font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: #fff;
+  margin-bottom: 5px;
+}
+.movie-card p {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
 }
 
 .btn-ticket {
-  margin-top: 15px;
+  display: block;
   width: 100%;
   padding: 10px;
-  background: #e50914;
+  background: #333;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
+  border-radius: 5px;
   text-decoration: none;
-  display: inline-block;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
 .btn-ticket:hover {
-  background: #b20710;
+  background: #e50914;
 }
 
 /* Modals */
@@ -235,44 +201,43 @@ body {
 }
 
 .modal-content {
-  background: #181818;
-  color: #fff;
+  background: #fff;
+  color: #333;
   margin: 8% auto;
   padding: 40px;
   width: 100%;
   max-width: 400px;
-  border-radius: 8px;
+  border-radius: 15px;
   position: relative;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .close {
   position: absolute;
   right: 20px;
   top: 15px;
-  font-size: 28px;
-  color: #999;
+  font-size: 30px;
   cursor: pointer;
+  color: #888;
 }
 
 .close:hover {
-  color: white;
+  color: #000;
 }
 
 .modal h2 {
-  margin-bottom: 25px;
   text-align: center;
+  margin-bottom: 25px;
   color: #e50914;
 }
 
 .modal form input {
   width: 100%;
   padding: 12px;
-  margin: 10px 0;
-  background: #333;
-  border: 1px solid #444;
-  border-radius: 4px;
-  color: white;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
 }
 
 .btn-submit {
@@ -281,10 +246,11 @@ body {
   background: #e50914;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 1.1rem;
   font-weight: bold;
-  margin-top: 15px;
+  transition: 0.3s;
 }
 
 .btn-submit:hover {

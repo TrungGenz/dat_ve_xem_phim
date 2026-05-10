@@ -50,7 +50,7 @@ $ds_phim = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <td><?= $phim['thoi_luong'] ?> phút</td>
                 <td>
                     <a href="sua_phim.php?id=<?= $phim['id'] ?>" class="btn-edit">Sửa</a> | 
-                    <a href="xoa_phim.php?id=<?= $phim['id'] ?>" class="btn-delete" onclick="return confirm('Duy chắc chắn muốn xóa phim này không?')">Xóa</a>
+                    <a href="xoa_phim.php?id=<?= $phim['id'] ?>" class="btn-delete" onclick="return confirm('chắc chắn muốn xóa phim này không?')">Xóa</a>
                 </td>
             </tr>
             <?php endforeach; ?>

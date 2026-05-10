@@ -8,7 +8,7 @@ if (!isset($_SESSION['vai_tro']) || $_SESSION['vai_tro'] != 1) {
     exit();
 }
 
-// 2. Xử lý khi Duy nhấn nút "Thêm Suất Chiếu"
+// 2. Xử lý khi nhấn nút "Thêm Suất Chiếu"
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phim_id = $_POST['phim_id'];
     $ngay_chieu = $_POST['ngay_chieu'];
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $phim_stmt = $conn->query("SELECT id, ten_phim FROM phim");
 $danh_sach_phim = $phim_stmt->fetchAll();
 
-// 4. Lấy danh sách suất chiếu hiện có để Duy quản lý
+// 4. Lấy danh sách suất chiếu hiện có để quản lý
 $show_stmt = $conn->query("SELECT s.*, p.ten_phim FROM suat_chieu s JOIN phim p ON s.phim_id = p.id ORDER BY s.ngay_chieu DESC");
 $ds_suat_chieu = $show_stmt->fetchAll();
 ?>

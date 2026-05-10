@@ -1,29 +1,28 @@
 <?php
-require_once '../cau_hinh/ket_noi_db.php';
 header('Content-Type: application/json');
+require_once '../cau_hinh/ket_noi_db.php';
 
-// Duy nhận id_phim từ Frontend gửi lên (ví dụ: lay_suat_chieu.php?id_phim=1)
-$id_phim = $_GET['id_phim'] ?? '';
+// Lấy id_phim từ link (ví dụ: lay_suat_chieu.php?id_phim=1)
+$id_phim = $_GET['id_phim'] ?? 0;
 
-if (empty($id_phim)) {
-    echo json_encode(["status" => "error", "message" => "Thiếu ID phim!"]);
-    exit;
-}
+if ($id_phim > 0) {
+    try {
+        // JOIN bảng suất chiếu với phim để lấy đủ thông tin
+        $sql = "SELECT s.id, s.ngay_chieu, s.gio_chieu, p.ten_phim 
+                FROM suat_chieu s 
+                JOIN phim p ON s.id_phim = p.id 
+                WHERE s.id_phim = ? 
+                ORDER BY s.ngay_chieu, s.gio_chieu ASC";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$id_phim]);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-try {
-    // SQL: Lấy giờ chiếu và ngày chiếu của bộ phim đó
-    // Duy kiểm tra lại tên bảng và cột trong DB của Duy nhé
-    $sql = "SELECT id, ngay_chieu, gio_chieu FROM suat_chieu WHERE phim_id = ? ORDER BY ngay_chieu, gio_chieu ASC";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$id_phim]);
-    $suat_chieu = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    echo json_encode([
-        "status" => "success",
-        "data" => $suat_chieu
-    ]);
-
-} catch (PDOException $e) {
-    echo json_encode(["status" => "error", "message" => "Lỗi: " . $e->getMessage()]);
+        echo json_encode($data);
+    } catch (PDOException $e) {
+        echo json_encode(["error" => $e->getMessage()]);
+    }
+} else {
+    echo json_encode([]);
 }
 ?>

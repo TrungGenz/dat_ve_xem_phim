@@ -1,35 +1,44 @@
 <?php
-session_start();
-require_once '../cau_hinh/ket_noi_db.php';
+require_once '../cau_hinh/ket_noi_db.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $ho_ten = $_POST['ho_ten'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $mat_khau = $_POST['mat_khau'] ?? '';
-    $sdt = $_POST['sdt'] ?? '';
-
-    if (empty($ho_ten) || empty($email) || empty($mat_khau)) {
-        echo "<script>alert('Vui lòng điền đầy đủ thông tin!'); window.history.back();</script>";
-        exit;
-    }
-
-    // Mã hóa mật khẩu
-    $mat_khau_hash = password_hash($mat_khau, PASSWORD_DEFAULT);
+    $ho_ten = $_POST['ho_ten'];
+    $email = $_POST['email'];
+    $mat_khau = password_hash($_POST['mat_khau'], PASSWORD_DEFAULT);
 
     try {
-        $sql = "INSERT INTO nguoi_dung (ho_ten, email, mat_khau, so_dien_thoai) VALUES (?, ?, ?, ?)";
+        // Bước 1: Kiểm tra email đã tồn tại chưa
+        $check_sql = "SELECT id FROM nguoi_dung WHERE email = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->execute([$email]);
+        
+        if ($check_stmt->rowCount() > 0) {
+            // Nếu tìm thấy email trong DB
+            echo "<script>
+                alert('Tài khoản này đã tồn tại! Vui lòng dùng email khác.');
+                window.history.back();
+            </script>";
+            exit();
+        }
+
+        // Bước 2: Nếu không trùng thì mới tiến hành Insert
+        $sql = "INSERT INTO nguoi_dung (ho_ten, email, mat_khau) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$ho_ten, $email, $mat_khau_hash, $sdt]);
+        $stmt->execute([$ho_ten, $email, $mat_khau]);
 
-        // Thông báo và tự động nhảy sang trang Đăng nhập
-        echo "<script>
-            alert('Đăng ký thành công! Chào mừng " . $ho_ten . " đến với rạp phim.');
-            window.location.href = '../trang/dang_nhap.php';
+        echo "
+        <div style='text-align: center; margin-top: 100px; font-family: sans-serif; background-color: #141414; color: white; height: 100vh; position: fixed; top: 0; left: 0; width: 100%;'>
+            <h2 style='color: #e50914;'>Đăng ký thành công!</h2>
+            <p style='font-size: 18px;'>Hệ thống sẽ chuyển sang trang đăng nhập sau 3 giây...</p>
+        </div>
+        <script>
+            setTimeout(function() {
+                window.location.href = '../index.php?act=login'; 
+            }, 3000);
         </script>";
-
+        
     } catch (PDOException $e) {
-        // Nếu trùng email
-        echo "<script>alert('Lỗi: Email này đã được sử dụng!'); window.history.back();</script>";
+        echo "Lỗi hệ thống: " . $e->getMessage();
     }
 }
 ?>
