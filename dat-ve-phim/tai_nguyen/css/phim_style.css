@@ -1,0 +1,92 @@
+/* Layout chính cho trang chi tiết phim */
+.detail-container {
+  max-width: 1100px;
+  margin: 50px auto;
+  display: flex;
+  gap: 40px;
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 15px;
+  color: white;
+}
+
+/* Phần ảnh bên trái */
+.movie-left {
+  flex: 1;
+}
+
+.movie-left img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid #333;
+}
+
+/* Phần nội dung bên phải */
+.movie-right {
+  flex: 2;
+}
+
+.movie-right h1 {
+  font-size: 2.5rem;
+  color: #e50914;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.movie-right p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.movie-right b {
+  color: white;
+}
+
+/* Danh sách suất chiếu */
+.showtime-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Nút giờ chiếu */
+.btn-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #333;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+  border: 1px solid #444;
+}
+
+.btn-time:hover {
+  background: #e50914;
+  border-color: #e50914;
+  transform: scale(1.05);
+}
+
+.btn-time span {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  opacity: 0.8;
+}
+
+.btn-time b {
+  font-size: 1.2rem;
+}
+
+/* Responsive cho điện thoại */
+@media (max-width: 768px) {
+  .detail-container {
+    flex-direction: column;
+    margin: 20px;
+  }
+}

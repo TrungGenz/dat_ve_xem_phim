@@ -122,7 +122,9 @@ body {
   background: #b20710;
 }
 
-/* Movie Grid */
+/* ============================================================
+   MOVIE GRID - TRANG CHỦ
+   ============================================================ */
 .movie-section {
   padding: 60px 10%;
 }
@@ -132,10 +134,12 @@ body {
   margin-bottom: 30px;
   border-left: 5px solid #e50914;
   padding-left: 15px;
+  color: #e50914; /* Đảm bảo tiêu đề nổi bật */
 }
 
 .movie-grid {
   display: grid;
+  /* repeat(auto-fill) giúp tự động xuống dòng khi màn hình nhỏ */
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 30px;
 }
@@ -147,17 +151,21 @@ body {
   text-align: center;
   transition: 0.3s;
   border: 1px solid #333;
+  display: flex; /* Dùng flex để các nút luôn nằm thẳng hàng ở dưới */
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .movie-card:hover {
   transform: translateY(-10px);
   border-color: #e50914;
+  box-shadow: 0 10px 20px rgba(229, 9, 20, 0.2);
 }
 
 .movie-card img {
   width: 100%;
-  height: 300px;
-  object-fit: cover;
+  height: 300px; /* Cố định chiều cao ảnh để các card đều nhau */
+  object-fit: cover; /* Giúp ảnh không bị méo */
   border-radius: 8px;
   margin-bottom: 15px;
 }
@@ -165,13 +173,20 @@ body {
 .movie-card h3 {
   font-size: 1.1rem;
   margin-bottom: 5px;
+  color: white;
+  /* Cắt bớt tên phim nếu quá dài */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 .movie-card p {
   color: #888;
   font-size: 0.9rem;
   margin-bottom: 15px;
 }
 
+/* Nút đặt vé trong thẻ phim */
 .btn-ticket {
   display: block;
   width: 100%;
@@ -186,6 +201,7 @@ body {
 
 .btn-ticket:hover {
   background: #e50914;
+  color: white;
 }
 
 /* Modals */
@@ -255,4 +271,233 @@ body {
 
 .btn-submit:hover {
   background: #b20710;
+}
+/* ============================================================
+   BIẾN TOÀN CỤC (VARIABLES)
+   Dùng để quản lý màu sắc chủ đạo của toàn trang Admin
+   ============================================================ */
+:root {
+  --primary-red: #e60000;
+  --dark-bg: #0b0b0b; /* Màu nền chính */
+  --sidebar-bg: #111; /* Màu nền thanh menu trái */
+  --card-bg: #1a1a1a; /* Màu nền các thẻ thống kê */
+}
+
+/* ============================================================
+   THIẾT LẬP CHUNG (GENERAL STYLES)
+   ============================================================ */
+body {
+  background-color: var(--dark-bg);
+  color: white;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Khung bao ngoài chia trang làm 2 phần: Sidebar và Nội dung chính */
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   THANH MENU BÊN TRÁI (SIDEBAR)
+   ============================================================ */
+.sidebar {
+  width: 260px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid #333;
+  padding-top: 20px;
+  position: fixed; /* Giữ menu cố định khi cuộn trang */
+  height: 100%;
+  z-index: 1000;
+}
+
+/* Tiêu đề 7AE ADMIN trong menu */
+.sidebar h2 {
+  text-align: center;
+  color: var(--primary-red);
+  font-size: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #222;
+  padding-bottom: 15px;
+}
+
+/* Các mục menu (Link) */
+.nav-item {
+  display: block;
+  padding: 15px 25px;
+  color: #bbb;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+/* Hiệu ứng khi di chuột qua mục menu */
+.nav-item:hover {
+  background: #1a1a1a;
+  color: var(--primary-red);
+  padding-left: 35px; /* Đẩy chữ sang phải một chút */
+}
+
+/* Mục menu đang được chọn (Active) */
+.nav-item.active {
+  background: #222;
+  color: white;
+  border-left: 5px solid var(--primary-red);
+}
+
+/* ============================================================
+   VÙNG NỘI DUNG CHÍNH (MAIN CONTENT)
+   ============================================================ */
+.main-content {
+  margin-left: 260px; /* Chừa khoảng trống cho Sidebar */
+  padding: 40px;
+  width: calc(100% - 260px);
+}
+
+/* Phần tiêu đề trang và lời chào Admin */
+.header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+/* ============================================================
+   CÁC THẺ THỐNG KÊ (DASHBOARD CARDS)
+   ============================================================ */
+/* Bố cục chia lưới cho các thẻ (Grid) */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* Thiết kế từng thẻ thống kê lẻ */
+.card {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #222;
+  transition: 0.3s;
+}
+
+/* Hiệu ứng khi di chuột qua thẻ */
+.card:hover {
+  border-color: var(--primary-red);
+  transform: translateY(-5px); /* Bay nhẹ lên trên */
+}
+
+/* Con số thống kê (Ví dụ: số phim, doanh thu) */
+.card h3 {
+  color: var(--primary-red);
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+/* Tên loại thống kê (Ví dụ: PHIM ĐANG CHIẾU) */
+.card p {
+  color: #888;
+  font-size: 13px;
+  margin: 0;
+  font-weight: bold;
+}
+/*phim*/
+/* --- KHUNG CHI TIẾT PHIM --- */
+.detail-container { 
+    background: #1a1a1a; 
+    color: white; 
+    padding: 50px 10%; 
+    display: flex; 
+    gap: 40px; 
+    min-height: 80vh;
+}
+
+/* --- PHẦN POSTER (BÊN TRÁI) --- */
+.movie-left img { 
+    width: 300px; 
+    border-radius: 12px; 
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.5); /* Đổ bóng màu đỏ đặc trưng */
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+.movie-left img:hover {
+    transform: scale(1.02);
+}
+
+/* --- PHẦN THÔNG TIN (BÊN PHẢI) --- */
+.movie-right {
+    flex: 1;
+}
+
+.movie-right h1 { 
+    color: #e50914; 
+    font-size: 35px; 
+    margin-top: 0;
+}
+
+.movie-right p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.movie-right b {
+    color: #fff;
+}
+
+/* --- LƯỚI SUẤT CHIẾU --- */
+.showtime-list { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
+    gap: 15px; 
+    margin-top: 25px; 
+}
+
+/* --- NÚT GIỜ CHIẾU --- */
+.btn-showtime { 
+    background: #333; 
+    color: white; 
+    padding: 12px; 
+    border-radius: 8px; 
+    text-align: center; 
+    text-decoration: none; 
+    border: 1px solid #444; 
+    transition: all 0.3s ease;
+}
+
+.btn-showtime:hover { 
+    background: #e50914; 
+    border-color: #e50914; 
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3);
+}
+
+.btn-showtime span { 
+    display: block; 
+    font-size: 12px; 
+    color: #ffc107; 
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.btn-showtime b { 
+    font-size: 18px; 
+    color: white;
+}
+
+/* Responsive cho điện thoại */
+@media (max-width: 768px) {
+    .detail-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+    .movie-left img {
+        width: 250px;
+    }
 }
