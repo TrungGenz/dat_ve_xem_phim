@@ -39,23 +39,27 @@ session_start();
         </div>
     </section>
 
-    <section id="movies" class="movie-section">
-        <h2>Phim Đang Chiếu</h2>
-        <div class="movie-grid">
+ <section id="movies" class="movie-section">
+    <h2>Phim Đang Chiếu</h2>
+    <div class="movie-grid">
+        <?php
+        require_once 'cau_hinh/ket_noi_db.php';
+        // Lấy tất cả phim từ bảng 'phim' mà Duy vừa tạo
+        $stmt = $conn->query("SELECT * FROM phim");
+        while ($row = $stmt->fetch()) {
+        ?>
             <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Phim 1">
-                <h3>đài bot</h3>
-                <p>Hành Động | 120 phút</p>
-                <button class="btn-ticket">Đặt Vé</button>
+                <img src="tai_nguyen/img/<?= $row['hinh_anh'] ?>" alt="<?= $row['ten_phim'] ?>" onerror="this.src='https://via.placeholder.com/200x300'">
+                <h3><?= $row['ten_phim'] ?></h3>
+                <p>Hành Động | <?= $row['thoi_luong'] ?> phút</p>
+                
+                <a href="trang/chi_tiet_phim.php?id_phim=<?= $row['id'] ?>" class="btn-ticket" style="text-decoration: none; display: inline-block; background: #e50914; color: white; padding: 10px 20px; border-radius: 5px;">
+                    ĐẶT VÉ
+                </a>
             </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/200x300" alt="Phim 2">
-                <h3>Chuyện Anh Lập gay</h3>
-                <p>Lãng Mạn | 105 phút</p>
-                <button class="btn-ticket">Đặt Vé</button>
-            </div>
-        </div>
-    </section>
+        <?php } ?>
+    </div>
+</section>
 
     <div id="loginModal" class="modal">
         <div class="modal-content">
